@@ -1,0 +1,47 @@
+service: mongo-rest-api
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+
+functions:
+  create:
+    handler: handler.create
+    events:
+      - http:
+          path: printers
+          method: post
+          cors: true
+  getOne:
+    handler: handler.getOne
+    events:
+      - http:
+          path: printers/{id}
+          method: get
+          cors: true
+  getAll:
+    handler: handler.getAll
+    events:
+     - http:
+         path: printers
+         method: get
+         cors: true
+  update:
+    handler: handler.update
+    events:
+     - http:
+         path: printers/{id}
+         method: put
+         cors: true
+  delete:
+    handler: handler.delete
+    events:
+     - http:
+         path: printers/{id}
+         method: delete
+         cors: true
+
+plugins:
+- serverless-offline
+
+
