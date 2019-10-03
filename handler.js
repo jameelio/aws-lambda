@@ -13,11 +13,15 @@ module.exports.create = (event, context, callback) => {
     )
     .then(printer => callback(null, {
       statusCode: 200,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      },
       body: JSON.stringify(printer)
     }))
     .catch(err => callback(null, {
       statusCode: err.statusCode || 500,
-      headers: { 'Content-Type': 'text/plain' },
+      headers: { 'Content-Type': 'text/plain'},
       body: `Could not create the printer.${err}`
     }));
 }
@@ -30,6 +34,10 @@ module.exports.getOne = (event, context, callback) => {
     )
     .then(printer => callback(null, {
       statusCode: 200,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      },
       body: JSON.stringify(printer)
     }))
     .catch(err => callback(null, {
@@ -47,11 +55,15 @@ module.exports.getAll = (event, context, callback) => {
     )
     .then(printers => callback(null, {
       statusCode: 200,
+      headers:{
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'},
       body: JSON.stringify(printers)
     }))
     .catch(err => callback(null, {
       statusCode: err.statusCode || 500,
-      headers: { 'Content-Type': 'text/plain' },
+      headers: { 'Content-Type': 'text/plain',
+                 'Access-Control-Allow-Origin':'*' },
       body: 'Could not fetch the printers.'
     }))
 };
@@ -64,6 +76,10 @@ module.exports.update = (event, context, callback) => {
     )
     .then(printer => callback(null, {
       statusCode: 200,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      },
       body: JSON.stringify(printer)
     }))
     .catch(err => callback(null, {
@@ -81,6 +97,10 @@ module.exports.delete = (event, context, callback) => {
     )
     .then(printer => callback(null, {
       statusCode: 200,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      },
       body: JSON.stringify({ message: 'Removed printer with id: ' + printer._id, printer: printer })
     }))
     .catch(err => callback(null, {
